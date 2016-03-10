@@ -9,8 +9,6 @@ import ru.javawebinar.topjava.model.UserMealWithExceed;
 
 import java.time.LocalDate;
 import java.time.*;
-import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * GKislin
@@ -62,7 +60,7 @@ public class UserMealsUtil {
     }
 
     public static UserMealWithExceed createWithExceed(UserMeal um, boolean exceeded) {
-        return new UserMealWithExceed(um.getDateTime(), um.getDescription(), um.getCalories(), exceeded);
+        return new UserMealWithExceed(um.getDateTime(), um.getDescription(), um.getCalories(), exceeded, um.getId());
 
 /*        Map<LocalDate, Integer> exceedsMap = new HashMap<>();
         List<UserMealWithExceed> retList = new ArrayList<>();
