@@ -19,6 +19,7 @@
 -  <a href="https://www.youtube.com/watch?v=ft0Nj8Cm9kk">Яков Файн: Как стать профессиональным Java разработчиком</a>
 -  <a href="http://www.quizful.net/test">Quizful- тесты онлайн</a>
 -  <a href="https://github.com/MaximAbramchuck/awesome-interviews#java">Сборка по вопросам на интервью</a>
+-  <a href="http://javastudy.ru/category/interview/">Сборка вопросов-ответов от JavaStudy</a>
 -  <a href="http://habrahabr.ru/post/181033/">Тест на знание SQL</a>
 -  <a href="https://drive.google.com/open?id=0B9Ye2auQ_NsFLTRFY293RUVPVms">Сборка вопросов от JavaRush</a>
 > про clone и finalize объязательно прочтите <a href="http://www.ozon.ru/context/detail/id/24828676/">Джошуа Блох: Java. Эффективное программирование (второе издание)</a>
@@ -48,8 +49,10 @@
 ### В течении проекта заполните <a href="http://goo.gl/forms/Oy5A7HNkWt">форму соискателя "Разработчик Java"</a>
 Я ее рассылаю всем знакомым HR, уже есть пинги и трудоустройство.
 
+### <a href="https://join.skype.com/l3q059nLAKYj">Группа в skype: Online Projects</a>. 
+Общение на все темы IT, обсуждение вступительных заданий, вакансии, цены на рынке труда, события, помощь, интересные видео по теме и пр.
+
 ### Основные сайты поиска работы:
 - <a href="hh.ru">HH</a>
 - <a href="https://www.linkedin.com/">LinkedIn</a>
 - <a href="http://djinni.co/">djinni.co (более актуально для Украины)</a>
-- <a href="https://moikrug.ru/">moikrug</a>
