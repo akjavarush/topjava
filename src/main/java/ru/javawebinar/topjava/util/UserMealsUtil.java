@@ -7,15 +7,13 @@ import java.util.stream.Collectors;
 
 
 import ru.javawebinar.topjava.model.UserMeal;
-import ru.javawebinar.topjava.model.UserMealWithExceed;
-import ru.javawebinar.topjava.util.TimeUtil;
+import ru.javawebinar.topjava.to.UserMealWithExceed;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.Month;
 import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * GKislin
