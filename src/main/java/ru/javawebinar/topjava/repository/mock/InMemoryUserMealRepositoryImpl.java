@@ -30,11 +30,13 @@ public class InMemoryUserMealRepositoryImpl implements UserMealRepository {
 
     @Override
     public UserMeal save(UserMeal userMeal) {
-        LOG.info("Save UserMeal " + userMeal + " InMemoryRepository");
+        /*LOG.info("Save UserMeal " + userMeal + " InMemoryRepository");*/
         if (userMeal.isNew()) {
             userMeal.setId(counter.incrementAndGet());
         }
         repository.put(userMeal.getId(), userMeal);
+        LOG.info("Save UserMeal " + userMeal + " InMemoryRepository");
+
         return userMeal;
     }
 
@@ -43,8 +45,10 @@ public class InMemoryUserMealRepositoryImpl implements UserMealRepository {
 
         LOG.info("Setting UserIDs to UserMeal " + userMeal + " InMemoryRepository");
 
-        if ((userMeal.getUserId()== null) &&((userMeal.getId() != 3) || (userMeal.getId() != 5))) {
-            userMeal.setId(1);
+        if ((userMeal.getUserId()== null) && (userMeal.getId() != 3) && (userMeal.getId() != 5)) {
+            userMeal.setUserId(1);
+        } else
+        {
 
         }
 
@@ -52,18 +56,29 @@ public class InMemoryUserMealRepositoryImpl implements UserMealRepository {
         return userMeal;
     }
     @Override
-    public void delete(int id) {
+    public boolean delete(int id) {
 
         LOG.info("Deleting UserMeal with id " + id);
 
-        repository.remove(id);
+        if (LoggedUser.id() == repository.get(id).getUserId())
+        {
+            repository.remove(id);
+            return true;
+        }
+
+        return false;
     }
 
     @Override
     public UserMeal get(int id) {
         LOG.info("Getting UserMeal with id " + id);
+        if (LoggedUser.id() == repository.get(id).getUserId())
+        {
+            repository.get(id);
 
-        return repository.get(id);
+        }
+
+        return null;
     }
 
     @Override
@@ -72,7 +87,7 @@ public class InMemoryUserMealRepositoryImpl implements UserMealRepository {
 
         return repository.values()
                 .stream()
-                .filter(um->((um.getUserId()!= null)&&(um.getUserId().intValue() == (LoggedUser.id()))))
+                .filter(um->((um.getUserId()!= null)&&(um.getUserId().intValue() == LoggedUser.id())))
                 .sorted((um1, um2)->um2.getDateTime().compareTo(um1.getDateTime()))
                 .collect(Collectors.toList());
     }

@@ -25,4 +25,13 @@
         <url-pattern>/meals</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>mealServletTest</servlet-name>
+        <servlet-class>ru.javawebinar.topjava.web.MealServletTest</servlet-class>
+        <load-on-startup>0</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>mealServletTest</servlet-name>
+        <url-pattern>/mealsTest</url-pattern>
+    </servlet-mapping>
 </web-app>
