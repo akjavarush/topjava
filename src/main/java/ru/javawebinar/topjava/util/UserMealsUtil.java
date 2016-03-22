@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 
 
 import ru.javawebinar.topjava.model.UserMeal;
-import ru.javawebinar.topjava.model.UserMealWithExceed;
+import ru.javawebinar.topjava.to.UserMealWithExceed;
 import ru.javawebinar.topjava.util.TimeUtil;
 
 import java.time.LocalDate;

@@ -1,10 +1,20 @@
+            request.getRequestDispatcher("mealEdit.jsp").forward(request, response);
+        }
+    }
+
+    private String resetParam(String param, HttpServletRequest request) {
+        String value = request.getParameter(param);
+        request.setAttribute(param, value);
+        return value;
 package ru.javawebinar.topjava.web;
 
+import ru.javawebinar.topjava.LoggedUser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.javawebinar.topjava.model.UserMeal;
-import ru.javawebinar.topjava.repository.mock.InMemoryUserMealRepositoryImpl;
+import ru.javawebinar.topjava.util.TimeUtil;
 import ru.javawebinar.topjava.repository.UserMealRepository;
+import ru.javawebinar.topjava.repository.mock.InMemoryUserMealRepositoryImpl;
 import ru.javawebinar.topjava.util.UserMealsUtil;
 
 import javax.servlet.ServletConfig;
@@ -13,7 +23,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Objects;
 
 /**
@@ -35,11 +47,14 @@ public class MealServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         String id = request.getParameter("id");
         UserMeal userMeal = new UserMeal(id.isEmpty() ? null : Integer.valueOf(id),
-                LocalDateTime.parse(request.getParameter("dateTime")),
-                request.getParameter("description"),
-                Integer.valueOf(request.getParameter("calories")));
+        String action = request.getParameter("action");
+        if (action == null) {
+            final UserMeal userMeal = new UserMeal(
+                    LocalDateTime.parse(request.getParameter("dateTime")),
+                    request.getParameter("description"),
+                    Integer.valueOf(request.getParameter("calories")));
         LOG.info(userMeal.isNew() ? "Create {}" : "Update {}", userMeal);
-        repository.save(userMeal);
+        repository.save(userMeal, LoggedUser.id());
         response.sendRedirect("meals");
     }
 
@@ -49,19 +64,35 @@ public class MealServlet extends HttpServlet {
         if (action == null) {
             LOG.info("getAll");
             request.setAttribute("mealList",
-                    UserMealsUtil.getWithExceeded(repository.getAll(), UserMealsUtil.DEFAULT_CALORIES_PER_DAY));
+                    UserMealsUtil.getWithExceeded(repository.getAll(LoggedUser.id()), UserMealsUtil.DEFAULT_CALORIES_PER_DAY));
             request.getRequestDispatcher("/mealList.jsp").forward(request, response);
         } else if (action.equals("delete")) {
             int id = getId(request);
             LOG.info("Delete {}", id);
-            repository.delete(id);
+            repository.delete(id, LoggedUser.id());
             response.sendRedirect("meals");
         } else {
             final UserMeal meal = action.equals("create") ?
                     new UserMeal(LocalDateTime.now(), "", 1000) :
-                    repository.get(getId(request));
+                    repository.get(getId(request), LoggedUser.id());
             request.setAttribute("meal", meal);
             request.getRequestDispatcher("mealEdit.jsp").forward(request, response);
+            if (request.getParameter("id").isEmpty()) {
+                LOG.info("Create {}", userMeal);
+                mealController.create(userMeal);
+            } else {
+                LOG.info("Update {}", userMeal);
+                mealController.update(userMeal, getId(request));
+            }
+            response.sendRedirect("meals");
+
+        } else if (action.equals("filter")) {
+            LocalDate startDate = TimeUtil.parseLocalDate(resetParam("startDate", request));
+            LocalDate endDate = TimeUtil.parseLocalDate(resetParam("endDate", request));
+            LocalTime startTime = TimeUtil.parseLocalTime(resetParam("startTime", request));
+            LocalTime endTime = TimeUtil.parseLocalTime(resetParam("endTime", request));
+            request.setAttribute("mealList", mealController.getBetween(startDate, startTime, endDate, endTime));
+            request.getRequestDispatcher("/mealList.jsp").forward(request, response);
         }
     }
 
