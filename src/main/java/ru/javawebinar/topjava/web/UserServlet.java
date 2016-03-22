@@ -29,7 +29,7 @@ public class UserServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
         Integer userId = Integer.valueOf(request.getParameter("userId"));
-        LOG.info("User with ID " + userId + "was choosed!");
+        LOG.info("User with ID " + userId + " was choose!");
 
         LoggedUser.setId(userId);
 
