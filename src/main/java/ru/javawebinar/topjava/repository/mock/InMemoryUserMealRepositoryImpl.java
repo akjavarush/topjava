@@ -49,7 +49,7 @@ public class InMemoryUserMealRepositoryImpl implements UserMealRepository {
             userMeal.setUserId(1);
         } else
         {
-
+            userMeal.setUserId(2);
         }
 
         repository.put(userMeal.getId(), userMeal);

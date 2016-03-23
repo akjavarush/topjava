@@ -21,6 +21,26 @@
     <h3>Meal list</h3>
     <a href="meals?action=create">Add Meal</a>
     <hr>
+    <form method="post" action="mealList.jsp?action=filter">
+        <table>
+            <tr>
+            <td>From Date</td>
+            <td><input type="date" name="fromDate" /></td>
+            </tr>
+            <tr>
+                <td>To Date</td>
+                <td><input type="date" name="toDate" /></td>
+            </tr>
+            <tr>
+                <td>From Time</td>
+                <td><input type="date" name="fromTime" /></td>
+            </tr>
+            <tr>
+                <td>To Time</td>
+                <td><input type="date" name="toTime" /></td>
+            </tr>
+        </table>
+    </form>
     <table border="1" cellpadding="8" cellspacing="0">
         <thead>
         <tr>
