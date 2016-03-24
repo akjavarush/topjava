@@ -12,6 +12,7 @@ import ru.javawebinar.topjava.to.UserMealWithExceed;
 import ru.javawebinar.topjava.util.UserMealsUtil;
 
 import javax.servlet.http.HttpServlet;
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 
@@ -27,15 +28,18 @@ public class UserMealRestController {
 
     private final Logger LOG = LoggerFactory.getLogger(getClass());
 
-    public List<UserMealWithExceed> getFilteredUserMeals(LocalTime startTime, LocalTime endTime, int caloriesPerDay)
+    public List<UserMealWithExceed> getFilteredUserMeals(LocalTime startTime, LocalTime endTime)
     {
-        return service.getByTimeFrame(startTime, endTime, caloriesPerDay, LoggedUser.id());
+        return service.getByTimeFrame(startTime, endTime, LoggedUser.getCaloriesPerDay(), LoggedUser.id());
     }
 
-    public List<UserMealWithExceed> getAll(int caloriesPerDay){
-        return service.getAll(caloriesPerDay, LoggedUser.id());
+    public List<UserMealWithExceed> getAll(){
+        return service.getAll(LoggedUser.getCaloriesPerDay(), LoggedUser.id());
     }
 
+    public List<UserMealWithExceed> getInFrame(String fromDate, String toDate, String fromTime, String toTime){
+        return service.getInFrame(fromDate, toDate, fromTime, toTime, LoggedUser.getCaloriesPerDay(), LoggedUser.id());
+    }
     public void delete(int id){
         service.delete(id, LoggedUser.id());
     }

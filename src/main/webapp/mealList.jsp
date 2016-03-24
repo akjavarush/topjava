@@ -19,9 +19,9 @@
 <section>
     <h2><a href="index.html">Home</a></h2>
     <h3>Meal list</h3>
-    <a href="meals?action=create">Add Meal</a>
+    <a href="/meals?action=create">Add Meal</a>
     <hr>
-    <form method="post" action="mealList.jsp?action=filter">
+    <form method="post" action="meals?action=filter">
         <table>
             <tr>
             <td>From Date</td>
@@ -33,14 +33,34 @@
             </tr>
             <tr>
                 <td>From Time</td>
-                <td><input type="date" name="fromTime" /></td>
+                <td><input type="time" name="fromTime" /></td>
             </tr>
             <tr>
                 <td>To Time</td>
-                <td><input type="date" name="toTime" /></td>
+                <td><input type="time" name="toTime" /></td>
             </tr>
         </table>
+        <input type="submit" name="Filter" />
     </form>
+    <table>
+        <tr>
+            <td>From Date</td>
+            <td><c:out value="${requestScope.fromDate}" /></td>
+        </tr>
+        <tr>
+            <td>To Date</td>
+            <td><c:out value="${requestScope.toDate}" /></td>
+        </tr>
+        <tr>
+            <td>From Time</td>
+            <td><c:out value="${requestScope.fromTime}" /></td>
+        </tr>
+        <tr>
+            <td>To Time</td>
+            <td><c:out value="${requestScope.toTime}" /></td>
+        </tr>
+    </table>
+
     <table border="1" cellpadding="8" cellspacing="0">
         <thead>
         <tr>

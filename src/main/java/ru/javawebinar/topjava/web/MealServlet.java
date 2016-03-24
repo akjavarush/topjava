@@ -7,6 +7,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import ru.javawebinar.topjava.model.UserMeal;
 import ru.javawebinar.topjava.repository.mock.InMemoryUserMealRepositoryImpl;
 import ru.javawebinar.topjava.repository.UserMealRepository;
+import ru.javawebinar.topjava.util.TimeUtil;
 import ru.javawebinar.topjava.util.UserMealsUtil;
 import ru.javawebinar.topjava.web.meal.UserMealRestController;
 
@@ -16,6 +17,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
@@ -39,7 +41,8 @@ public class MealServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws javax.servlet.ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
-        if (request.getAttribute("action").equals("edit"))
+        String requestParameter = request.getParameter("action");
+        if (requestParameter.equals("edit"))
         {
             String id = request.getParameter("id");
             UserMeal userMeal = new UserMeal(id.isEmpty() ? null : Integer.valueOf(id),
@@ -49,9 +52,15 @@ public class MealServlet extends HttpServlet {
             LOG.info(userMeal.isNew() ? "Create {}" : "Update {}", userMeal);
             controller.save(userMeal);
             response.sendRedirect("meals");
-        } else if (request.getAttribute("action").equals("filter"))
+        } else if (requestParameter.equals("filter"))
         {
+            String fromDate = request.getParameter("fromDate");
+            String toDate = request.getParameter("toDate");
+            String fromTime = request.getParameter("fromTime");
+            String toTime = request.getParameter("toTime");
 
+            request.setAttribute("mealList", controller.getInFrame(fromDate, toDate, fromTime, toTime));
+            request.getRequestDispatcher("/mealList.jsp").forward(request, response);
         }
 
     }
@@ -62,7 +71,7 @@ public class MealServlet extends HttpServlet {
         if (action == null) {
             LOG.info("getAll");
             request.setAttribute("mealList",
-                    controller.getAll(UserMealsUtil.DEFAULT_CALORIES_PER_DAY));
+                    controller.getAll());
             request.getRequestDispatcher("/mealList.jsp").forward(request, response);
 
 

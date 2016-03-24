@@ -9,13 +9,17 @@ import ru.javawebinar.topjava.model.UserMeal;
 import ru.javawebinar.topjava.repository.UserMealRepository;
 import ru.javawebinar.topjava.repository.mock.InMemoryUserMealRepositoryImpl;
 import ru.javawebinar.topjava.to.UserMealWithExceed;
+import ru.javawebinar.topjava.util.TimeUtil;
 import ru.javawebinar.topjava.util.UserMealsUtil;
 import ru.javawebinar.topjava.util.exception.NotFoundException;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * GKislin
@@ -60,20 +64,35 @@ public class UserMealServiceImpl implements UserMealService {
     @Override
     public List<UserMealWithExceed> getByTimeFrame(LocalTime startTime, LocalTime endTime, int caloriesPerDay, int userId) throws NotFoundException {
         LOG.info("Fetching list of UserMealWithExceed within time frame!");
-        return UserMealsUtil.getFilteredWithExceeded(repository.getAll(), startTime, endTime, caloriesPerDay);
-    }
-
-    @Override
-    public List<UserMealWithExceed> getByDateTimeFrame(LocalDateTime startTime, LocalDateTime endTime, int caloriesPerDay, int userId) throws NotFoundException {
-        return null;
+        return UserMealsUtil.getFilteredWithExceeded(repository.getAll(userId), startTime, endTime, caloriesPerDay);
     }
 
     @Override
     public List<UserMealWithExceed> getAll(int caloriesPerDay, int userId) {
-        Collection<UserMeal> userMeals = repository.getAll();
-
+        Collection<UserMeal> userMeals = repository.getAll(userId);
         return UserMealsUtil.getWithExceeded(userMeals, caloriesPerDay);
     }
+
+    @Override
+    public List<UserMealWithExceed> getInFrame(String fromDateString, String toDateString, String fromTimeString, String toTimeString, int caloriesPerDay, int userId) {
+        Collection<UserMeal> allMeals = repository.getAll(userId);
+
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+        LocalDate fromDate = (fromDateString.isEmpty())? LocalDate.MIN : LocalDate.parse(fromDateString, dateFormatter);
+        LocalDate toDate = (toDateString.isEmpty())? LocalDate.MAX : LocalDate.parse(toDateString, dateFormatter);
+
+        LocalTime fromTime = (fromTimeString.isEmpty())? LocalTime.MIN : LocalTime.parse(fromTimeString);
+        LocalTime toTime = (toTimeString.isEmpty())? LocalTime.MAX : LocalTime.parse(toTimeString);
+
+        Collection<UserMeal> filteredByDate = allMeals.stream().
+                filter(m->((m.getDateTime().toLocalDate().compareTo(fromDate) >-1 ) && (m.getDateTime().toLocalDate().compareTo(toDate) <1))).
+                collect(Collectors.toList());
+
+        return UserMealsUtil.getFilteredWithExceeded(filteredByDate,fromTime, toTime, caloriesPerDay);
+    }
+
+
 
     @Override
     public void update(UserMeal userMeal, int userId) {

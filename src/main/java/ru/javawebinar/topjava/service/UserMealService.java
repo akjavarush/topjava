@@ -6,8 +6,10 @@ import ru.javawebinar.topjava.model.UserMeal;
 import ru.javawebinar.topjava.to.UserMealWithExceed;
 import ru.javawebinar.topjava.util.exception.NotFoundException;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -21,11 +23,13 @@ public interface UserMealService {
 
     UserMeal get(int id, int userId) throws NotFoundException;
 
+
     List<UserMealWithExceed> getByTimeFrame(LocalTime startTime, LocalTime endTime, int caloriesPerDay, int userId) throws NotFoundException;
 
-    List<UserMealWithExceed> getByDateTimeFrame(LocalDateTime startTime, LocalDateTime endTime, int caloriesPerDay, int userId) throws NotFoundException;
-
     List<UserMealWithExceed> getAll(int caloriesPerDay, int userId);
+    List<UserMealWithExceed> getInFrame(String fromDate, String toDate, String fromTime, String toTime, int caloriesPerDay, int id);
 
     void update(UserMeal userMeal, int userId);
+
+
 }

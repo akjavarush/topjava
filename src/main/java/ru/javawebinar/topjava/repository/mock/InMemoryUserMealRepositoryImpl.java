@@ -82,12 +82,12 @@ public class InMemoryUserMealRepositoryImpl implements UserMealRepository {
     }
 
     @Override
-    public Collection<UserMeal> getAll() {
+    public Collection<UserMeal> getAll(int id) {
         LOG.info("Getting ALL UserMeals filtered by UserID=1 and Sorted by DateTime!" );
 
         return repository.values()
                 .stream()
-                .filter(um->((um.getUserId()!= null)&&(um.getUserId().intValue() == LoggedUser.id())))
+                .filter(um->((um.getUserId()!= null)&&(um.getUserId().intValue() == id)))
                 .sorted((um1, um2)->um2.getDateTime().compareTo(um1.getDateTime()))
                 .collect(Collectors.toList());
     }
