@@ -15,6 +15,14 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.List;
+
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.List;
+
 /**
  * GKislin
  * 06.03.2015.
@@ -61,6 +69,7 @@ public class UserMealRestController {
     public List<UserMealWithExceed> getBetween(LocalDate startDate, LocalTime startTime, LocalDate endDate, LocalTime endTime) {
         int userId = LoggedUser.id();
         LOG.info("getBetween dates {} - {} for time {} - {} for User {}", startDate, endDate, startTime, endTime, userId);
+
         return UserMealsUtil.getFilteredWithExceeded(
                 service.getBetweenDates(
                         startDate != null ? startDate : TimeUtil.MIN_DATE, endDate != null ? endDate : TimeUtil.MAX_DATE, userId),
