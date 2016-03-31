@@ -12,6 +12,8 @@
 -  <a href="http://habrahabr.ru/post/184372/">Резюме программистов. Часть 2 (хорошие)</a>
 -  <a href="http://skyeng.ru/articles/sostavte-rezyume-na-anglijskom-450-primerov">Как составить резюме на английском</a>
 
+### <a href="http://javaops.ru/story.html">Наши истории (делимся опытом и успехом)</a>
+
 ### Интервью:
 - <a href="https://www.youtube.com/watch?v=Deb5wMHjBHY">Михаил Портнов. Собеседование на работу: как продать себя грамотно</a>
 - <a href="https://www.youtube.com/watch?v=qKsc8PoHJwM">Михаил Портнов. Какие вопросы мы задаем на собеседовании?</a>
