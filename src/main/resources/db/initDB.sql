@@ -2,6 +2,8 @@ DROP TABLE IF EXISTS user_roles;
 DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS user_meals;
 DROP SEQUENCE IF EXISTS global_seq;
+DROP INDEX IF EXISTS meals_unique_idx;
+DROP INDEX IF EXISTS users_unique_email_idx;
 
 CREATE SEQUENCE global_seq START 100000;
 
@@ -25,6 +27,8 @@ CREATE TABLE user_roles
   FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
 );
 
+
+
 CREATE TABLE user_meals
 (
   meal_id         SERIAL PRIMARY KEY,
@@ -34,3 +38,6 @@ CREATE TABLE user_meals
   user_id INTEGER NOT NULL,
   FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
 );
+
+
+/*CREATE UNIQUE INDEX meals_unique_idx ON users (id);*/

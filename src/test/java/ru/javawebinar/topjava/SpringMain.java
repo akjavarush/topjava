@@ -19,7 +19,7 @@ import java.util.List;
 public class SpringMain {
     public static void main(String[] args) {
         // java 7 Automatic resource management
-        String[] configArray = {"spring/spring-app.xml", "spring/spring-db.xml"};
+        String[] configArray = {"spring/spring-inmemory-test.xml"};
         try (ConfigurableApplicationContext appCtx = new ClassPathXmlApplicationContext(configArray)) {
             System.out.println(Arrays.toString(appCtx.getBeanDefinitionNames()));
             AdminRestController adminUserController = appCtx.getBean(AdminRestController.class);
