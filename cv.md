@@ -23,8 +23,8 @@
 -  <a href="https://github.com/MaximAbramchuck/awesome-interviews#java">Сборка по вопросам на интервью</a>
 -  <a href="http://javastudy.ru/category/interview/">Сборка вопросов-ответов от JavaStudy</a>
 -  <a href="http://habrahabr.ru/post/181033/">Тест на знание SQL</a>
+-  <a href="http://jsehelper.blogspot.ru/p/blog-page.html">Вопросы на собеседовании Java Junior Developer</a>
 -  <a href="https://drive.google.com/open?id=0B9Ye2auQ_NsFLTRFY293RUVPVms">Сборка вопросов от JavaRush</a>
-- <a href="http://jsehelper.blogspot.ru/p/blog-page.html">Вопросы на собеседовании Java Junior Developer</a>
 > про clone и finalize объязательно прочтите <a href="http://www.ozon.ru/context/detail/id/24828676/">Джошуа Блох: Java. Эффективное программирование (второе издание)</a>
 
 -  <a href="http://bookvoed.ru/book?id=2593572">Cracking the Coding Interview</a>
