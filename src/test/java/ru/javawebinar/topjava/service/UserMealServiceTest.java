@@ -71,7 +71,7 @@ public class UserMealServiceTest {
 
     @Test(expected = NotFoundException.class)
     public void testNotFoundUpdate() throws Exception {
-        
+
         UserMeal item = service.get(MEAL1_ID, USER_ID);
         System.out.println("/////////////////");
         System.out.println(USER_ID);

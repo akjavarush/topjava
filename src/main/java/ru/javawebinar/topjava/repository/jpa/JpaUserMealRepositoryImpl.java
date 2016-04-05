@@ -34,8 +34,8 @@ public class JpaUserMealRepositoryImpl implements UserMealRepository {
     @Transactional
     public UserMeal save(UserMeal userMeal, int userId) {
 
-        User user = userRep.get(userId);
-        userMeal.setUser(user);
+        User ref = entityManager.getReference(User.class, userId);
+        userMeal.setUser(ref);
         if (userMeal.isNew())
         {
 
