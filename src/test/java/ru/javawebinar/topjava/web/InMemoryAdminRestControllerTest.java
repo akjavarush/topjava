@@ -21,7 +21,7 @@ public class InMemoryAdminRestControllerTest {
 
     @BeforeClass
     public static void beforeClass() {
-        appCtx = new ClassPathXmlApplicationContext("spring/spring-app.xml", "spring/mock.xml");
+        appCtx = new ClassPathXmlApplicationContext("spring/spring-app.xml", "spring/spring-mvc.xml", "spring/mock.xml");
         String[] configArray = {"spring/spring-app.xml", "spring/spring-db.xml"};
         appCtx = new ClassPathXmlApplicationContext(configArray);
         System.out.println("\n" + Arrays.toString(appCtx.getBeanDefinitionNames()) + "\n");
@@ -39,7 +39,9 @@ public class InMemoryAdminRestControllerTest {
 
     @AfterClass
     public static void afterClass() {
-        appCtx.close();
+//        May cause during JUnit "Cache is not alive (STATUS_SHUTDOWN)" as JUnit share Spring context for speed
+//        http://stackoverflow.com/questions/16281802/ehcache-shutdown-causing-an-exception-while-running-test-suite
+//        appCtx.close();
     }
 
     @Test
