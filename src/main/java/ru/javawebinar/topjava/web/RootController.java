@@ -20,10 +20,7 @@ public class RootController {
     @Autowired
     private UserService userService;
 
-    @Autowired
-    private UserMealService mealService;
-
-    @Autowired
+   @Autowired
     private UserMealService mealService;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
