@@ -51,6 +51,12 @@ public class AbstractUserMealController {
         service.update(meal, userId);
     }
 
+    public void update(UserMeal meal) {
+        meal.setId(LoggedUser.id());
+        int userId = LoggedUser.id();
+        LOG.info("update {} for User {}", meal, userId);
+        service.update(meal, userId);
+    }
     public UserMeal create(UserMeal meal) {
         meal.setId(null);
         int userId = LoggedUser.id();

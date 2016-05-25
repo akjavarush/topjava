@@ -1,17 +1,26 @@
 package ru.javawebinar.topjava.web.meal;
 
 import org.junit.Test;
+import org.springframework.http.MediaType;
+import ru.javawebinar.topjava.model.Role;
+import ru.javawebinar.topjava.model.User;
 import ru.javawebinar.topjava.web.AbstractControllerTest;
+import ru.javawebinar.topjava.web.json.JsonUtil;
+
+import java.util.Collections;
 
 import static org.hamcrest.Matchers.*;
 import static org.hamcrest.Matchers.hasProperty;
 import static org.hamcrest.Matchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static ru.javawebinar.topjava.MealTestData.MEAL1;
+import static ru.javawebinar.topjava.UserTestData.MATCHER;
 import static ru.javawebinar.topjava.UserTestData.USER;
+import static ru.javawebinar.topjava.UserTestData.USER_ID;
 import static ru.javawebinar.topjava.model.BaseEntity.START_SEQ;
 
 /**

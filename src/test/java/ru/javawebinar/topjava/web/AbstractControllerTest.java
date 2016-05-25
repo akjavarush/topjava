@@ -35,7 +35,7 @@ import static ru.javawebinar.topjava.Profiles.POSTGRES;
 @ActiveProfiles({POSTGRES, DATAJPA})
 abstract public class AbstractControllerTest {
 
-    private static final CharacterEncodingFilter CHARACTER_ENCODING_FILTER = new CharacterEncodingFilter();
+    protected static final CharacterEncodingFilter CHARACTER_ENCODING_FILTER = new CharacterEncodingFilter();
 
     static {
         CHARACTER_ENCODING_FILTER.setEncoding("UTF-8");
